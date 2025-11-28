@@ -37,21 +37,6 @@ body {
     top: 0;
     width: 100%;
     background: rgba(30, 27, 75, 0.8);
-    backdrop-filter: blur(10px);
-    z-index: 1000;
-    padding: 1rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    font-size: 1.5rem;
-    font-weight: 700;
     color: var(--text-primary);
     text-decoration: none;
 }
