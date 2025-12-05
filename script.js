@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Typing Animation ---
     const typingElement = document.querySelector('.typing-text');
-    const phrases = ["Java Developer", "Cloud Engineer", "Microservices Expert"];
+    const phrases = ["Java Developer", "Cloud Engineer", "Software Engineer"];
     let phraseIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
