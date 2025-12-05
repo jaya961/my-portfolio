@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, observerOptions);
 
     // Add animation class to sections
-    document.querySelectorAll('.section-title, .about-content, .timeline-item, .skill-card').forEach(el => {
+    document.querySelectorAll('.section-title, .about-content, .timeline-item, .skill-card, .recognition-card, .contact-card').forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(20px)';
         el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
