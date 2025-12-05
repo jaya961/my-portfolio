@@ -37,36 +37,75 @@ document.addEventListener('DOMContentLoaded', () => {
                     behavior: 'smooth'
                 });
             }
+        });
+    });
 
-            setTimeout(type, typeSpeed);
+
+    // --- Typing Animation ---
+    const typingElement = document.querySelector('.typing-text');
+    const phrases = ["Software Engineer"]; // Single title as requested
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let typeSpeed = 100;
+
+    function type() {
+        const currentPhrase = phrases[phraseIndex];
+
+        if (isDeleting) {
+            typingElement.textContent = currentPhrase.substring(0, charIndex - 1);
+            charIndex--;
+            typeSpeed = 50;
+        } else {
+            typingElement.textContent = currentPhrase.substring(0, charIndex + 1);
+            charIndex++;
+            typeSpeed = 100;
         }
+
+        if (!isDeleting && charIndex === currentPhrase.length) {
+            // Finished typing phrase
+            // If only one phrase, STOP here. Do not delete.
+            if (phrases.length > 1) {
+                isDeleting = true;
+                typeSpeed = 2000;
+            } else {
+                return; // Stop the animation loop
+            }
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            phraseIndex = (phraseIndex + 1) % phrases.length;
+            typeSpeed = 500;
+        }
+
+        setTimeout(type, typeSpeed);
+    }
 
     // Start typing if element exists
     if (typingElement) {
-            type();
-        }
+        type();
+    }
 
 
-        // --- Scroll Animations (Intersection Observer) ---
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: "0px 0px -50px 0px"
-        };
+    // --- Scroll Animations (Intersection Observer) ---
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px"
+    };
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-show');
-                    observer.unobserve(entry.target); // Animates only once
-                }
-            });
-        }, observerOptions);
-
-        // Select elements to animate
-        const animateElements = document.querySelectorAll('.section-title, .about-content, .timeline-item, .skill-card, .recognition-card, .contact-card, .hero-text, .hero-visual');
-
-        animateElements.forEach(el => {
-            el.classList.add('animate-hidden');
-            observer.observe(el);
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-show');
+                observer.unobserve(entry.target);
+            }
         });
+    }, observerOptions);
+
+    // Select elements to animate
+    const animateElements = document.querySelectorAll('.section-title, .about-content, .timeline-item, .skill-card, .recognition-card, .contact-card, .hero-text, .hero-visual');
+
+    animateElements.forEach(el => {
+        el.classList.add('animate-hidden');
+        observer.observe(el);
     });
+});
